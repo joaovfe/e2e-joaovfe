@@ -7,7 +7,7 @@ const config: PlaywrightTestConfig = {
   use: {
     trace: 'on',
     locale: 'pt-BR',
-    headless: true,
+    headless: !!process.env.CI,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     screenshot: 'on',
@@ -23,7 +23,8 @@ const config: PlaywrightTestConfig = {
         outputFolder: 'artifacts/report',
         open: 'never'
       }
-    ]
+    ],
+    ['junit', { outputFile: 'artifacts/junit-results.xml' }]
   ]
 };
 export default config;
