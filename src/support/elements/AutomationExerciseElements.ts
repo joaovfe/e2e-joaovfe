@@ -72,9 +72,6 @@ export default class AutomationExerciseElements extends BaseElements {
   }
 
   getContactSuccessMessage(): Locator {
-    // O site tem dois <div class="status alert alert-success">: um placeholder
-    // vazio que vive sempre no DOM e outro injetado após o submit com o texto
-    // de confirmação. Usar getByText filtra pelo nó de texto correto.
-    return this.page.getByText('Success! Your details have been submitted successfully.');
+    return this.page.locator('#contact-page .status.alert.alert-success');
   }
 }
