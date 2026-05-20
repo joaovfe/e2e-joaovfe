@@ -39,7 +39,8 @@ export default class AutomationExercisePage extends BasePage {
 
   // Test 3 — Contact form
   async acessarPaginaDeContato(): Promise<void> {
-    // Register the dialog handler as soon as we land on the contact flow.
+    // O submit dispara um confirm() nativo. O handler precisa estar registrado
+    // antes do click no submit — registramos aqui no início do fluxo.
     this.page.on('dialog', (dialog) => dialog.accept());
 
     await this.automationExerciseElements.getMenuContactUsLink().click();
@@ -56,13 +57,8 @@ export default class AutomationExercisePage extends BasePage {
   }
 
   async validarMensagemDeSucessoDeContato(): Promise<void> {
-    // After a successful POST the page re-renders with a visible success banner.
-    // There are two .alert-success divs in the markup — pick the first visible one.
-    const successMessage = this.page
-      .locator('div.status.alert.alert-success', {
-        hasText: 'Success! Your details have been submitted successfully.'
-      })
-      .first();
-    await expect(successMessage).toBeVisible({ timeout: 30000 });
+    await expect(this.automationExerciseElements.getContactSuccessMessage()).toBeVisible({
+      timeout: 30000
+    });
   }
 }

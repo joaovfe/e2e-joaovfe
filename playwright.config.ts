@@ -24,7 +24,8 @@ const config: PlaywrightTestConfig = {
         open: 'never'
       }
     ],
-    ['junit', { outputFile: 'artifacts/junit-results.xml' }]
+    ['junit', { outputFile: 'artifacts/junit-results.xml' }],
+    ['json', { outputFile: 'artifacts/test-results.json' }]
   ]
 };
 export default config;
